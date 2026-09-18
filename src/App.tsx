@@ -2,184 +2,158 @@ import React, { useState } from 'react';
 import { WelcomeScreen } from './screens/WelcomeScreen';
 import { RoleSelectionScreen } from './screens/RoleSelectionScreen';
 import { OtpScreen } from './screens/OtpScreen';
-import { WorkerShopSetupScreen } from './screens/WorkerShopSetupScreen';
 import { CustomerDiscoverScreen } from './screens/CustomerDiscoverScreen';
 import { CustomerBookingScreen } from './screens/CustomerBookingScreen';
-import { CustomerProfileScreen } from './screens/CustomerProfileScreen';
 import { CustomerQueueTrackingScreen } from './screens/CustomerQueueTrackingScreen';
+import { CustomerProfileScreen } from './screens/CustomerProfileScreen';
+import { WorkerShopSetupScreen } from './screens/WorkerShopSetupScreen';
 import { WorkerLiveQueueScreen } from './screens/WorkerLiveQueueScreen';
 import { WorkerCompletedScreen } from './screens/WorkerCompletedScreen';
 import { WorkerProfileScreen } from './screens/WorkerProfileScreen';
 
-type Screen =
+export type Screen =
   | 'welcome'
-  | 'role_selection'
+  | 'role-selection'
   | 'otp'
-  | 'worker_setup'
-  | 'customer_app'
-  | 'customer_tracking'
-  | 'worker_app';
+  | 'customer-discover'
+  | 'customer-booking'
+  | 'customer-tracking'
+  | 'customer-profile'
+  | 'worker-setup'
+  | 'worker-queue'
+  | 'worker-completed'
+  | 'worker-profile';
 
 export const App: React.FC = () => {
   const [currentScreen, setCurrentScreen] = useState<Screen>('welcome');
-  const [selectedRole, setSelectedRole] = useState<'customer' | 'worker'>('customer');
-  const [customerTab, setCustomerTab] = useState<'discover' | 'booking' | 'profile'>('discover');
-  const [workerTab, setWorkerTab] = useState<'queue' | 'completed' | 'profile'>('queue');
-  const [trackingPreviousTab, setTrackingPreviousTab] = useState<'discover' | 'booking'>('discover');
+  const [role, setRole] = useState<'customer' | 'worker'>('customer');
+  const [lastCustomerTab, setLastCustomerTab] = useState<Screen>('customer-discover');
 
-  // Handlers for Onboarding Flow
-  const handleWelcomeRoleSelect = (role: 'customer' | 'worker') => {
-    setSelectedRole(role);
+  const handleSelectRoleFromWelcome = (selectedRole: 'customer' | 'worker') => {
+    setRole(selectedRole);
     setCurrentScreen('otp');
   };
 
-  const handleGoToRoleSelection = () => {
-    setCurrentScreen('role_selection');
-  };
-
-  const handleRoleSelectionContinue = (role: 'customer' | 'worker') => {
-    setSelectedRole(role);
+  const handleContinueFromRoleSelection = (selectedRole: 'customer' | 'worker') => {
+    setRole(selectedRole);
     setCurrentScreen('otp');
   };
 
-  const handleOtpVerified = () => {
-    if (selectedRole === 'customer') {
-      setCustomerTab('discover');
-      setCurrentScreen('customer_app');
+  const handleOtpVerify = () => {
+    if (role === 'customer') {
+      setCurrentScreen('customer-discover');
     } else {
-      setCurrentScreen('worker_setup');
+      setCurrentScreen('worker-setup');
     }
   };
 
-  const handleWorkerSetupComplete = () => {
-    setWorkerTab('queue');
-    setCurrentScreen('worker_app');
+  const handleCustomerNavigateTab = (tab: 'discover' | 'booking' | 'profile') => {
+    if (tab === 'discover') {
+      setCurrentScreen('customer-discover');
+      setLastCustomerTab('customer-discover');
+    } else if (tab === 'booking') {
+      setCurrentScreen('customer-booking');
+      setLastCustomerTab('customer-booking');
+    } else if (tab === 'profile') {
+      setCurrentScreen('customer-profile');
+      setLastCustomerTab('customer-profile');
+    }
+  };
+
+  const handleWorkerNavigateTab = (tab: 'queue' | 'completed' | 'profile') => {
+    if (tab === 'queue') {
+      setCurrentScreen('worker-queue');
+    } else if (tab === 'completed') {
+      setCurrentScreen('worker-completed');
+    } else if (tab === 'profile') {
+      setCurrentScreen('worker-profile');
+    }
   };
 
   const handleLogout = () => {
+    setRole('customer');
     setCurrentScreen('welcome');
-    setCustomerTab('discover');
-    setWorkerTab('queue');
   };
-
-  // Tracking Live Queue
-  const handleTrackQueue = () => {
-    setTrackingPreviousTab(customerTab === 'booking' ? 'booking' : 'discover');
-    setCurrentScreen('customer_tracking');
-  };
-
-  const handleBackFromTracking = () => {
-    setCurrentScreen('customer_app');
-    setCustomerTab(trackingPreviousTab);
-  };
-
-  // Render screens
-  if (currentScreen === 'welcome') {
-    return (
-      <WelcomeScreen
-        onGoToRoleSelection={handleGoToRoleSelection}
-        onSelectRole={handleWelcomeRoleSelect}
-      />
-    );
-  }
-
-  if (currentScreen === 'role_selection') {
-    return (
-      <RoleSelectionScreen
-        initialRole={selectedRole}
-        onBack={() => setCurrentScreen('welcome')}
-        onContinue={handleRoleSelectionContinue}
-      />
-    );
-  }
-
-  if (currentScreen === 'otp') {
-    return (
-      <OtpScreen
-        role={selectedRole}
-        onBack={() => setCurrentScreen('role_selection')}
-        onVerify={handleOtpVerified}
-      />
-    );
-  }
-
-  if (currentScreen === 'worker_setup') {
-    return (
-      <WorkerShopSetupScreen
-        onBack={() => setCurrentScreen('otp')}
-        onFinish={handleWorkerSetupComplete}
-      />
-    );
-  }
-
-  if (currentScreen === 'customer_tracking') {
-    return (
-      <CustomerQueueTrackingScreen
-        shopName="XYZ Luxury Salon & Spa"
-        onBack={handleBackFromTracking}
-      />
-    );
-  }
-
-  // Customer Main App Screen (Discover | Booking | Profile)
-  if (currentScreen === 'customer_app') {
-    if (customerTab === 'discover') {
-      return (
-        <CustomerDiscoverScreen
-          onNavigateTab={(tab) => setCustomerTab(tab)}
-          onTrackQueue={handleTrackQueue}
-        />
-      );
-    }
-    if (customerTab === 'booking') {
-      return (
-        <CustomerBookingScreen
-          onNavigateTab={(tab) => setCustomerTab(tab)}
-          onTrackQueue={handleTrackQueue}
-        />
-      );
-    }
-    if (customerTab === 'profile') {
-      return (
-        <CustomerProfileScreen
-          onLogout={handleLogout}
-          onNavigateTab={(tab) => setCustomerTab(tab)}
-        />
-      );
-    }
-  }
-
-  // Worker Main App Screen (Live Queue | Completed | Profile)
-  if (currentScreen === 'worker_app') {
-    if (workerTab === 'queue') {
-      return (
-        <WorkerLiveQueueScreen
-          onNavigateTab={(tab) => setWorkerTab(tab)}
-        />
-      );
-    }
-    if (workerTab === 'completed') {
-      return (
-        <WorkerCompletedScreen
-          onNavigateTab={(tab) => setWorkerTab(tab)}
-        />
-      );
-    }
-    if (workerTab === 'profile') {
-      return (
-        <WorkerProfileScreen
-          onLogout={handleLogout}
-          onNavigateTab={(tab) => setWorkerTab(tab)}
-        />
-      );
-    }
-  }
 
   return (
-    <WelcomeScreen
-      onGoToRoleSelection={handleGoToRoleSelection}
-      onSelectRole={handleWelcomeRoleSelect}
-    />
+    <div className="min-h-screen bg-white">
+      {/* Active Screen Rendering */}
+      {currentScreen === 'welcome' && (
+        <WelcomeScreen
+          onSelectRole={handleSelectRoleFromWelcome}
+          onGoToRoleSelection={() => setCurrentScreen('role-selection')}
+        />
+      )}
+
+      {currentScreen === 'role-selection' && (
+        <RoleSelectionScreen
+          initialRole={role}
+          onBack={() => setCurrentScreen('welcome')}
+          onContinue={handleContinueFromRoleSelection}
+        />
+      )}
+
+      {currentScreen === 'otp' && (
+        <OtpScreen
+          role={role}
+          onBack={() => setCurrentScreen('role-selection')}
+          onVerify={handleOtpVerify}
+        />
+      )}
+
+      {currentScreen === 'customer-discover' && (
+        <CustomerDiscoverScreen
+          onNavigateTab={handleCustomerNavigateTab}
+          onTrackQueue={() => setCurrentScreen('customer-tracking')}
+        />
+      )}
+
+      {currentScreen === 'customer-booking' && (
+        <CustomerBookingScreen
+          onNavigateTab={handleCustomerNavigateTab}
+          onTrackQueue={() => setCurrentScreen('customer-tracking')}
+        />
+      )}
+
+      {currentScreen === 'customer-tracking' && (
+        <CustomerQueueTrackingScreen
+          onBack={() => setCurrentScreen(lastCustomerTab)}
+        />
+      )}
+
+      {currentScreen === 'customer-profile' && (
+        <CustomerProfileScreen
+          onNavigateTab={handleCustomerNavigateTab}
+          onLogout={handleLogout}
+        />
+      )}
+
+      {currentScreen === 'worker-setup' && (
+        <WorkerShopSetupScreen
+          onBack={() => setCurrentScreen('otp')}
+          onFinish={() => setCurrentScreen('worker-queue')}
+        />
+      )}
+
+      {currentScreen === 'worker-queue' && (
+        <WorkerLiveQueueScreen
+          onNavigateTab={handleWorkerNavigateTab}
+        />
+      )}
+
+      {currentScreen === 'worker-completed' && (
+        <WorkerCompletedScreen
+          onNavigateTab={handleWorkerNavigateTab}
+        />
+      )}
+
+      {currentScreen === 'worker-profile' && (
+        <WorkerProfileScreen
+          onNavigateTab={handleWorkerNavigateTab}
+          onLogout={handleLogout}
+        />
+      )}
+    </div>
   );
 };
 
