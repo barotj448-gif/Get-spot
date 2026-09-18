@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>GET SPOT - Worker Live Queue</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              red: '#e11d48',
+              'red-hover': '#be123c',
+              dark: '#0f172a',
+              muted: '#64748b',
+              border: '#e2e8f0',
+              bg: '#ffffff',
+              subtle: '#f8fafc',
+              blue: '#2563eb'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #ffffff;
+      color: #0f172a;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-white text-slate-900 antialiased flex flex-col justify-between pb-24">
+<!-- Top Navigation / Header -->
+<header class="border-b border-slate-200 bg-white sticky top-0 z-30">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+<!-- Left-aligned brand logo -->
+<div class="flex items-center">
+<img alt="GET SPOT Logo" class="h-10 sm:h-12 w-auto object-contain object-left" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfDEtUo5zDa5QXkIGtAKiwXWEmigC7H1-pLIL6wdn_5na_du1veCEHILmXSQnia00wGIyCkHQxhImjHMasVIBODKtpawG9njNoyAeE8wq35EWXY04xhkRaIw0NA2EGtdm3G8fIYTb49kLwfH33_gyh05uzaGS8GXqDFtlDmu4EfM8eaZARmYLoqJ7nfSTGuB4jxIh6uBSHYv88TR8Tent1u9_E4eUM43QLQ12QzdwA6q3a6C-ERzgkFaGciXiYIOd2ydk">
+</div>
+</div>
+</header>
+<!-- Main Content Area: Responsive Grid (Desktop: Shop info LEFT, Queue RIGHT; Mobile: Stacked) -->
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+<!-- ======================================== -->
+<!-- LEFT SIDE: Large Shop Banner / Shop Photo & Shop Name -->
+<!-- ======================================== -->
+<div class="lg:col-span-5 w-full">
+<!-- Sticky on desktop for ergonomic queue oversight -->
+<div class="lg:sticky lg:top-28 space-y-4">
+<!-- Large Shop Banner / Shop Photo -->
+<div class="relative rounded-lg overflow-hidden border border-slate-200 shadow-sm bg-slate-100">
+<img alt="Classic Cuts Barbershop" class="w-full h-56 sm:h-72 lg:h-80 object-cover object-center rounded-xl" src="https://lh3.googleusercontent.com/aida/AEtjO1Xsl6dvyswFG2MF9vTGJu6iW4nTFIqyhfum7KioMmScSKv9aymy8_tlAWj1nnz4Yhlut5XskYgkA9see-NrMlRu5RQH9pkZCVFMKpk5E7swY1pRM8jhNBuTRjGLhWiibGtj6VfptNd7PUayMcVMWgXEevXSZzvl7VvEiYxvPiHYQhia13IecVHJaN-KHCeBaRo5BiGNV9wGocjJRDV_0BxFMgrmWWXFXBASjx3NJEVhFilgrF7t3KwnENk">
+</div>
+<!-- Shop Name below photo -->
+<div class="pt-1">
+<h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+              Classic Cuts Barbershop
+            </h1>
+<p class="text-sm text-slate-500 mt-1 font-medium">Shop 14, High Street Market, Downtown</p>
+</div>
+</div>
+</div>
+<!-- ======================================== -->
+<!-- RIGHT SIDE: Live Queue (#1, #2 Active; Divider; #3, #4 Waiting) -->
+<!-- ======================================== -->
+<div class="lg:col-span-7 w-full">
+<div class="border border-slate-200 rounded-lg p-5 sm:p-7 shadow-sm bg-white">
+<div class="mb-5 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<h2 class="text-sm font-bold uppercase tracking-wider text-slate-800">Live Serving &amp; Queue</h2>
+</div>
+</div>
+<!-- ACTIVE CUSTOMERS (#1 & #2) -->
+<div class="space-y-4">
+<!-- Row 1: Rahul Patel / Token #01 -->
+<div class="flex items-center justify-between gap-4 p-4 rounded-xl border border-slate-200 bg-slate-50/70 shadow-sm">
+<div class="flex flex-col">
+<span class="text-xl font-bold text-slate-900 tracking-tight whitespace-nowrap">Rahul Patel</span>
+<span class="text-sm font-medium text-slate-500">Token #01</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 rounded-lg text-xs font-semibold bg-[#2563eb] text-white hover:bg-blue-700 transition-colors shadow-sm whitespace-nowrap">Call Next</button>
+<button class="px-4 py-2 rounded-lg text-xs font-semibold bg-emerald-600 text-white hover:bg-emerald-700 transition-colors shadow-sm flex items-center justify-center gap-1.5 whitespace-nowrap">
+<span class="">Complete</span>
+<span class="">✓</span>
+</button>
+</div>
+</div>
+<!-- Row 2: Amit Shah / Token #02 -->
+<div class="flex items-center justify-between gap-4 p-4 rounded-xl border border-slate-200 bg-slate-50/70 shadow-sm">
+<div class="flex flex-col">
+<span class="text-xl font-bold text-slate-900 tracking-tight whitespace-nowrap">Amit Shah</span>
+<span class="text-sm font-medium text-slate-500">Token #02</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 rounded-lg text-xs font-semibold bg-[#2563eb] text-white hover:bg-blue-700 transition-colors shadow-sm whitespace-nowrap">Call Next</button>
+<button class="px-4 py-2 rounded-lg text-xs font-semibold bg-emerald-600 text-white hover:bg-emerald-700 transition-colors shadow-sm flex items-center justify-center gap-1.5 whitespace-nowrap">
+<span class="">Complete</span>
+<span class="">✓</span>
+</button>
+</div>
+</div>
+</div>
+<!-- ONE LONG HORIZONTAL DIVIDER -->
+<div class="my-6 border-t-2 border-slate-200"></div>
+<!-- WAITING CUSTOMERS (#3 & #4) -->
+<div class="space-y-4">
+<!-- Row 3: Jay Patel / Token #03 -->
+<div class="flex items-center justify-between p-4 rounded-xl border border-slate-200/80 bg-white hover:bg-slate-50/50 transition-colors">
+<div class="flex flex-col">
+<span class="text-lg font-bold text-slate-900 tracking-tight whitespace-nowrap">Jay Patel</span>
+<span class="text-sm font-medium text-slate-500">Token #03</span>
+</div>
+<div>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold text-rose-700 bg-rose-50 border border-rose-200 whitespace-nowrap">Waiting</span>
+</div>
+</div>
+<!-- Row 4: Vishal Mehta / Token #04 -->
+<div class="flex items-center justify-between p-4 rounded-xl border border-slate-200/80 bg-white hover:bg-slate-50/50 transition-colors">
+<div class="flex flex-col">
+<span class="text-lg font-bold text-slate-900 tracking-tight whitespace-nowrap">Vishal Mehta</span>
+<span class="text-sm font-medium text-slate-500">Token #04</span>
+</div>
+<div>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold text-rose-700 bg-rose-50 border border-rose-200 whitespace-nowrap">Waiting</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Clean Minimalist Footer -->
+<footer class="border-t border-slate-200 py-6 bg-white mt-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-2">
+<span class="">GET SPOT Live Queue Management</span>
+</div>
+</footer>
+
+
+<nav class="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-slate-200 py-2.5 px-6 shadow-sm"><div class="max-w-7xl mx-auto flex items-center justify-around md:justify-center md:gap-16"><a href="#" class="flex flex-col items-center gap-1 text-blue-600 font-semibold text-xs transition-colors"><span class="material-symbols-outlined text-2xl leading-none">format_list_bulleted</span><span class="">Live Queue</span></a><a href="#" class="flex flex-col items-center gap-1 text-slate-500 hover:text-slate-900 font-medium text-xs transition-colors"><span class="material-symbols-outlined text-2xl leading-none">check_circle</span><span class="">Completed</span></a><a href="#" class="flex flex-col items-center gap-1 text-slate-500 hover:text-slate-900 font-medium text-xs transition-colors"><span class="material-symbols-outlined text-2xl leading-none">person</span><span class="">Profile</span></a></div></nav></body></html>

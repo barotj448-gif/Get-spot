@@ -1,0 +1,437 @@
+<!DOCTYPE html><html class="h-full" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+<title>GET SPOT - Authentication</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+    @layer base {
+      html, body {
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        overscroll-behavior: none;
+      }
+      .pb-safe {
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      .pt-safe {
+        padding-top: env(safe-area-inset-top, 0px);
+      }
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* 2D Micro-interaction Animation */
+    @keyframes moveDot {
+      0% {
+        transform: translateX(0);
+        opacity: 0;
+      }
+      15% {
+        opacity: 1;
+      }
+      70% {
+        transform: translateX(112px);
+        opacity: 1;
+      }
+      82% {
+        transform: translateX(112px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(112px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes pulseTargetRing {
+      0%, 65% {
+        transform: scale(0.65);
+        opacity: 0;
+      }
+      72% {
+        transform: scale(0.9);
+        opacity: 0.9;
+      }
+      88% {
+        transform: scale(1.6);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1.6);
+        opacity: 0;
+      }
+    }
+
+    @keyframes markerPop {
+      0%, 66% {
+        transform: scale(1);
+      }
+      74% {
+        transform: scale(1.12);
+      }
+      84% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .animate-spot-dot {
+      animation: moveDot 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    .animate-spot-ring {
+      animation: pulseTargetRing 3.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+      transform-origin: center;
+    }
+    .animate-marker-pop {
+      animation: markerPop 3.2s ease-out infinite;
+      transform-origin: bottom center;
+    }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-container-highest": "#dae2fd",
+            "on-secondary-fixed": "#410002",
+            "on-surface": "#0f172a",
+            "on-tertiary-container": "#ffede6",
+            "secondary-fixed-dim": "#ffb4ab",
+            "surface": "#ffffff",
+            "primary-fixed-dim": "#b4c5ff",
+            "primary": "#dc2626",
+            "error": "#ba1a1a",
+            "on-tertiary-fixed-variant": "#7d2d00",
+            "secondary-fixed": "#ffdad6",
+            "on-primary-container": "#eeefff",
+            "secondary": "#bb0112",
+            "tertiary": "#943700",
+            "surface-container-low": "#fafafa",
+            "inverse-on-surface": "#eef0ff",
+            "on-tertiary-fixed": "#360f00",
+            "surface-tint": "#dc2626",
+            "tertiary-container": "#bc4800",
+            "error-container": "#ffdad6",
+            "on-surface-variant": "#475569",
+            "on-background": "#0f172a",
+            "tertiary-fixed-dim": "#ffb596",
+            "surface-dim": "#f1f5f9",
+            "surface-container-high": "#f8fafc",
+            "on-secondary-fixed-variant": "#93000b",
+            "on-primary-fixed": "#00174b",
+            "background": "#ffffff",
+            "primary-container": "#ef4444",
+            "primary-fixed": "#dbe1ff",
+            "secondary-container": "#e02928",
+            "outline-variant": "#e2e8f0",
+            "surface-container-lowest": "#ffffff",
+            "surface-container": "#f8fafc",
+            "on-error": "#ffffff",
+            "on-error-container": "#93000a",
+            "surface-variant": "#f1f5f9",
+            "on-secondary": "#ffffff",
+            "inverse-surface": "#1e293b",
+            "on-tertiary": "#ffffff",
+            "tertiary-fixed": "#ffdbcd",
+            "on-primary": "#ffffff",
+            "outline": "#64748b",
+            "surface-bright": "#ffffff",
+            "on-secondary-container": "#fffbff",
+            "on-primary-fixed-variant": "#003ea8",
+            "inverse-primary": "#b4c5ff"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "2xl": "1rem",
+            "full": "9999px"
+          },
+          fontFamily: {
+            "display-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-xl": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-md": ["Plus Jakarta Sans", "sans-serif"],
+            "title-sm": ["Inter", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "label-md": ["Inter", "sans-serif"],
+            "label-sm": ["Inter", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-white font-body-md text-body-md text-slate-900 antialiased min-h-screen flex flex-col pt-safe pb-safe selection:bg-red-100 selection:text-red-700">
+<main class="flex-1 flex flex-col relative w-full px-5 sm:px-8 bg-white max-w-lg mx-auto justify-between py-6 sm:py-10">
+<!-- TOP SECTION: Centered Logo & Brief Intro -->
+<div class="flex flex-col items-start text-left pt-2 sm:pt-4 w-full">
+<!-- Left-aligned Official GET SPOT Logo with increased size -->
+<div class="w-full flex justify-start items-center mb-3">
+<img alt="GET SPOT" class="h-14 sm:h-16 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAduYZoz4Ipa4kGR2CJ-A78ZWPwflxGoFq1p7VnUTxg5wHLDO9TbuwIBV6r9Ku9FfHBQmLywBPFoeQI3Duf5cFcGOEoTmGDba-kiAQNWxCNSonOOab9UUv63VPQHoewIj8464fgiUSzGbRqt4DWFrNdBScZjuFEiNkQQDWKndV_vJVHQ9_ysL64QZKQ_TNWFuvvIADXnRGUCqX2_6R31VfiTP_J8Bt6-s1qfEB99yhfzlz4M02LwEQamr_Hm6d9sUkZpeE">
+</div>
+<p class="text-sm sm:text-base text-slate-500 font-medium leading-snug">
+Smart queueing &amp; live spot tracking
+</p>
+</div>
+<!-- CENTER SECTION: 2D Minimal Branded Animation & Tagline -->
+<div class="flex flex-col items-center justify-center my-8 sm:my-10">
+  <style>
+    @keyframes mapRouteTrace {
+      0%, 12% { stroke-dashoffset: 160; opacity: 0.3; }
+      55%, 85% { stroke-dashoffset: 0; opacity: 1; }
+      92%, 100% { stroke-dashoffset: 0; opacity: 0; }
+    }
+    @keyframes mapUserTravel {
+      0% { offset-distance: 0%; opacity: 0; transform: scale(0.7); }
+      10% { offset-distance: 0%; opacity: 1; transform: scale(1); }
+      62% { offset-distance: 100%; opacity: 1; transform: scale(1); }
+      72%, 85% { offset-distance: 100%; opacity: 0.85; transform: scale(0.9); }
+      92%, 100% { offset-distance: 100%; opacity: 0; transform: scale(0.6); }
+    }
+    @keyframes userHaloPulse {
+      0%, 10% { transform: scale(1); opacity: 0.8; }
+      30% { transform: scale(2.2); opacity: 0; }
+      31%, 100% { transform: scale(1); opacity: 0; }
+    }
+    @keyframes spotPinReact {
+      0%, 58% { transform: scale(1); }
+      66% { transform: translateY(-4px) scale(1.15); }
+      74% { transform: translateY(0) scale(1); }
+      82% { transform: scale(1.04); }
+      90%, 100% { transform: scale(1); }
+    }
+    @keyframes spotRipplePulse {
+      0%, 60% { transform: scale(0.6); opacity: 0; }
+      66% { transform: scale(0.9); opacity: 0.8; stroke-width: 2.5; }
+      84% { transform: scale(1.9); opacity: 0; stroke-width: 1; }
+      100% { transform: scale(1.9); opacity: 0; }
+    }
+    @keyframes spotBadgeFade {
+      0%, 64% { opacity: 0; transform: translateY(3px) scale(0.9); }
+      72%, 86% { opacity: 1; transform: translateY(0) scale(1); }
+      92%, 100% { opacity: 0; transform: translateY(-2px) scale(0.95); }
+    }
+    .route-active-line {
+      stroke-dasharray: 160;
+      animation: mapRouteTrace 3.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    .user-nav-dot {
+      offset-path: path("M 36 76 C 54 76, 68 58, 102 54 C 132 50, 146 38, 168 28");
+      animation: mapUserTravel 3.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    .user-pulse-ring {
+      animation: userHaloPulse 3.8s ease-out infinite;
+      transform-origin: 36px 76px;
+    }
+    .spot-marker-group {
+      animation: spotPinReact 3.8s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+      transform-origin: 168px 28px;
+    }
+    .spot-ripple-circle {
+      animation: spotRipplePulse 3.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+      transform-origin: 168px 28px;
+    }
+    .spot-badge-group {
+      animation: spotBadgeFade 3.8s ease-out infinite;
+      transform-origin: 168px 6px;
+    }
+  </style>
+  <div class="w-full max-w-[280px] bg-slate-50/70 border border-slate-100 rounded-2xl p-4 flex flex-col items-center justify-center">
+    <!-- Minimal 2D Vector Map Canvas -->
+    <div class="relative w-full h-28 flex items-center justify-center overflow-visible">
+      <svg class="w-full h-full overflow-visible" viewBox="0 0 210 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Abstract Map Road Grid Lines -->
+        <path d="M 10 32 H 200" stroke="#E2E8F0" stroke-width="1.75" stroke-linecap="round"></path>
+        <path d="M 10 76 H 200" stroke="#E2E8F0" stroke-width="1.75" stroke-linecap="round"></path>
+        <path d="M 62 10 V 90" stroke="#E2E8F0" stroke-width="1.75" stroke-linecap="round"></path>
+        <path d="M 148 10 V 90" stroke="#E2E8F0" stroke-width="1.75" stroke-linecap="round"></path>
+        <path d="M 10 92 C 55 92, 75 42, 120 42 C 165 42, 175 14, 205 14" stroke="#CBD5E1" stroke-width="1.25" stroke-linecap="round" opacity="0.55"></path>
+
+        <!-- User Origin Stationary Pulse Ring -->
+        <circle class="user-pulse-ring" cx="36" cy="76" r="6" fill="none" stroke="#0F172A" stroke-width="1.5"></circle>
+        <circle cx="36" cy="76" r="3.5" fill="#94A3B8" opacity="0.7"></circle>
+
+        <!-- Base Dashed Route Guidance -->
+        <path d="M 36 76 C 54 76, 68 58, 102 54 C 132 50, 146 38, 168 28" stroke="#CBD5E1" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="3 5"></path>
+
+        <!-- Active Animated Dynamic Route Layer -->
+        <path class="route-active-line" d="M 36 76 C 54 76, 68 58, 102 54 C 132 50, 146 38, 168 28" stroke="#DC2626" stroke-width="2.5" stroke-linecap="round"></path>
+
+        <!-- Ripple expanding when spot reached -->
+        <circle class="spot-ripple-circle" cx="168" cy="28" r="12" fill="none" stroke="#DC2626"></circle>
+
+        <!-- Gliding User Location Dot -->
+        <g class="user-nav-dot">
+          <circle cx="0" cy="0" r="6.5" fill="#0F172A" filter="drop-shadow(0 1px 2px rgba(15,23,42,0.3))"></circle>
+          <circle cx="0" cy="0" r="2.5" fill="#FFFFFF"></circle>
+        </g>
+
+        <!-- Spot Arrival Badge Popover -->
+        <g class="spot-badge-group" transform="translate(168, 6)">
+          <rect x="-24" y="-14" width="48" height="14" rx="7" fill="#0F172A"></rect>
+          <text x="0" y="-4" fill="#FFFFFF" font-size="8.5" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" letter-spacing="0.04em" text-anchor="middle">GET SPOT</text>
+          <polygon points="-3,0 3,0 0,3" fill="#0F172A"></polygon>
+        </g>
+
+        <!-- Destination Red Map Pin -->
+        <g class="spot-marker-group">
+          <!-- Ground shadow -->
+          <ellipse cx="168" cy="28" rx="4.5" ry="2" fill="#0F172A" opacity="0.18"></ellipse>
+          <!-- Teardrop Pin Marker with inner cutout -->
+          <g transform="translate(168, 28)">
+            <path d="M 0 0 C -1.5 -2 -9 -11.5 -9 -17.5 C -9 -22.5 -5 -26.5 0 -26.5 C 5 -26.5 9 -22.5 9 -17.5 C 9 -11.5 1.5 -2 0 0 Z" fill="#DC2626" filter="drop-shadow(0 2px 3px rgba(220,38,38,0.35))"></path>
+            <circle cx="0" cy="-17.5" r="3.5" fill="#FFFFFF"></circle>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <!-- Tagline directly below map animation -->
+    
+  </div>
+</div>
+<!-- BOTTOM SECTION: Authentication & Terms -->
+<div class="w-full flex flex-col items-center">
+<div class="w-full max-w-sm flex flex-col gap-4">
+<!-- Prominent 'Continue with Google' Button -->
+<button class="w-full min-h-[52px] py-3.5 px-5 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 shadow-sm active:scale-[0.99] transition-all duration-150 ease-in-out rounded-xl flex items-center justify-center gap-3.5 text-slate-800 font-semibold text-base select-none cursor-pointer group" id="googleAuthBtn" type="button">
+<svg aria-hidden="true" class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24">
+<path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z" fill="#4285F4"></path>
+<path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z" fill="#34A853"></path>
+<path d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.14-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.98 0 12s.45 3.82 1.25 5.42l4.03-3.15z" fill="#FBBC05"></path>
+<path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z" fill="#EA4335"></path>
+</svg>
+<span class="tracking-tight" id="googleBtnText">Continue with Google</span>
+</button><div class="w-full pt-1 pb-0.5 text-center flex flex-col items-center gap-3"><div class="grid grid-cols-3 gap-2 w-full pt-1.5"><div class="flex flex-col items-center text-center p-2 rounded-xl bg-transparent"><svg class="w-5 h-5 mb-1 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg><span class="font-bold text-[11px] text-slate-900 tracking-wider uppercase">FIND</span><span class="text-[11px] text-slate-500 leading-tight mt-0.5">Nearby businesses</span></div><div class="flex flex-col items-center text-center p-2 rounded-xl bg-transparent"><svg class="w-5 h-5 mb-1 text-red-600" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg><span class="font-bold text-[11px] text-red-600 tracking-wider uppercase">GET SPOT</span><span class="text-[11px] text-slate-500 leading-tight mt-0.5">Join the live queue</span></div><div class="flex flex-col items-center text-center p-2 rounded-xl bg-transparent"><svg class="w-5 h-5 mb-1 text-[#f59e0b]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg><span class="font-bold text-[11px] text-slate-900 tracking-wider uppercase">ARRIVE</span><span class="text-[11px] text-slate-500 leading-tight mt-0.5">Come when your turn is near</span></div></div></div>
+<!-- Terms & Privacy Links -->
+<p class="text-center text-xs text-slate-400 leading-relaxed px-2 font-body-md">
+          By continuing, you agree to our 
+          <a class="text-slate-600 hover:text-slate-900 underline underline-offset-2 transition-colors" href="#">Terms of Service</a> 
+          and 
+          <a class="text-slate-600 hover:text-slate-900 underline underline-offset-2 transition-colors" href="#">Privacy Policy</a>.
+        </p>
+</div>
+</div>
+</main>
+<!-- ROLE SELECTION MODAL / BOTTOM SHEET (Revealed on 'Continue with Google') -->
+<div class="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-900/40 backdrop-blur-xs opacity-0 pointer-events-none transition-opacity duration-200" id="roleSelectionModal">
+<div class="w-full max-w-md bg-white rounded-t-3xl sm:rounded-2xl p-6 sm:p-7 shadow-2xl transform translate-y-full sm:translate-y-4 transition-transform duration-250 ease-out border border-slate-100 flex flex-col gap-5" id="roleModalContent">
+<!-- Modal Header -->
+<div class="flex items-center justify-between">
+<div>
+<span class="text-xs font-bold uppercase tracking-wider text-red-600">GET SPOT Account</span>
+<h3 class="text-xl font-headline-md font-bold text-slate-900 tracking-tight mt-0.5">Who are you?</h3>
+</div>
+<button aria-label="Close" class="p-1.5 text-slate-400 hover:text-slate-700 rounded-full hover:bg-slate-100 transition-colors" id="closeModalBtn" type="button">
+<span class="material-symbols-outlined text-xl leading-none">close</span>
+</button>
+</div>
+<!-- Role Options -->
+<div class="flex flex-col gap-3 pt-1">
+<!-- Customer Option -->
+<button class="role-card group w-full text-left p-4 rounded-xl border border-slate-200 hover:border-red-500 hover:bg-red-50/40 active:scale-[0.99] transition-all flex items-start gap-3.5 focus:outline-none focus:ring-2 focus:ring-red-500" type="button">
+<div class="w-10 h-10 rounded-lg bg-red-100/80 text-red-600 flex items-center justify-center flex-shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">person</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-headline-md font-semibold text-base text-slate-900 group-hover:text-red-600 transition-colors">I’m a Customer</span>
+<span class="material-symbols-outlined text-slate-400 text-lg group-hover:text-red-600 group-hover:translate-x-0.5 transition-all">arrow_forward</span>
+</div>
+<p class="text-xs sm:text-sm text-slate-500 mt-0.5">Find businesses and get your digital spot</p>
+</div>
+</button>
+<!-- Worker Option -->
+<button class="role-card group w-full text-left p-4 rounded-xl border border-slate-200 hover:border-slate-800 hover:bg-slate-50 active:scale-[0.99] transition-all flex items-start gap-3.5 focus:outline-none focus:ring-2 focus:ring-slate-800" type="button">
+<div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center flex-shrink-0 group-hover:bg-slate-800 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">storefront</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-headline-md font-semibold text-base text-slate-900 group-hover:text-slate-900 transition-colors">I’m a Worker</span>
+<span class="material-symbols-outlined text-slate-400 text-lg group-hover:text-slate-800 group-hover:translate-x-0.5 transition-all">arrow_forward</span>
+</div>
+<p class="text-xs sm:text-sm text-slate-500 mt-0.5">Manage your business and live queue</p>
+</div>
+</button>
+</div>
+<div class="pt-1 pb-1 text-center">
+<p class="text-[11px] text-slate-400">You can switch or link accounts anytime in Settings</p>
+</div>
+</div>
+</div>
+<script>
+    (function() {
+      const googleBtn = document.getElementById('googleAuthBtn');
+      const googleBtnText = document.getElementById('googleBtnText');
+      const roleModal = document.getElementById('roleSelectionModal');
+      const roleContent = document.getElementById('roleModalContent');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+      const roleCards = document.querySelectorAll('.role-card');
+
+      function openModal() {
+        roleModal.classList.remove('opacity-0', 'pointer-events-none');
+        roleContent.classList.remove('translate-y-full');
+        roleContent.classList.remove('sm:translate-y-4');
+        roleContent.classList.add('translate-y-0');
+      }
+
+      function closeModal() {
+        roleModal.classList.add('opacity-0', 'pointer-events-none');
+        roleContent.classList.remove('translate-y-0');
+        roleContent.classList.add('translate-y-full', 'sm:translate-y-4');
+      }
+
+      if (googleBtn) {
+        googleBtn.addEventListener('click', function() {
+          const originalText = googleBtnText.textContent;
+          googleBtnText.textContent = 'Connecting...';
+          googleBtn.classList.add('opacity-80', 'pointer-events-none');
+
+          setTimeout(() => {
+            googleBtnText.textContent = originalText;
+            googleBtn.classList.remove('opacity-80', 'pointer-events-none');
+            openModal();
+          }, 600);
+        });
+      }
+
+      if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeModal);
+      }
+
+      roleModal.addEventListener('click', function(e) {
+        if (e.target === roleModal) {
+          closeModal();
+        }
+      });
+
+      roleCards.forEach(card => {
+        card.addEventListener('click', function() {
+          const roleTitle = this.querySelector('.font-semibold').textContent;
+          card.classList.add('ring-2', 'ring-offset-1');
+          setTimeout(() => {
+            closeModal();
+            card.classList.remove('ring-2', 'ring-offset-1');
+          }, 300);
+        });
+      });
+    })();
+  </script>
+
+
+
+
+</body></html>

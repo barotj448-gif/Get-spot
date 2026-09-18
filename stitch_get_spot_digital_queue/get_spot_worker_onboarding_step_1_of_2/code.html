@@ -1,0 +1,169 @@
+<!DOCTYPE html><html class="h-full" lang="en" style=""><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><title>Phone Auth</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{width:100%;min-height:100%;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-tertiary": "#ffffff", "on-error-container": "#93000a", "secondary-fixed": "#ffdad6", "surface-container-low": "#f2f3ff", "secondary-fixed-dim": "#ffb4ab", "surface-tint": "#0053db", "surface": "#faf8ff", "outline-variant": "#c3c6d7", "primary-fixed": "#dbe1ff", "on-primary-fixed-variant": "#003ea8", "primary-container": "#2563eb", "surface-container": "#eaedff", "surface-container-high": "#e2e7ff", "tertiary-fixed": "#ffdbcd", "surface-variant": "#dae2fd", "background": "#faf8ff", "tertiary-container": "#bc4800", "secondary": "#bb0112", "error": "#ba1a1a", "inverse-on-surface": "#eef0ff", "error-container": "#ffdad6", "outline": "#737686", "on-tertiary-fixed": "#360f00", "on-surface-variant": "#434655", "tertiary": "#943700", "tertiary-fixed-dim": "#ffb596", "on-surface": "#131b2e", "on-secondary-container": "#fffbff", "primary-fixed-dim": "#b4c5ff", "inverse-primary": "#b4c5ff", "surface-dim": "#d2d9f4", "on-secondary-fixed": "#410002", "on-secondary": "#ffffff", "on-error": "#ffffff", "on-tertiary-container": "#ffede6", "on-primary-fixed": "#00174b", "primary": "#004ac6", "on-primary-container": "#eeefff", "surface-bright": "#faf8ff", "on-tertiary-fixed-variant": "#7d2d00", "on-primary": "#ffffff", "on-secondary-fixed-variant": "#93000b", "surface-container-highest": "#dae2fd", "on-background": "#131b2e", "inverse-surface": "#283044", "surface-container-lowest": "#ffffff", "secondary-container": "#e02928" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "container-max": "75rem", "space-sm": "0.75rem", "space-2xs": "0.25rem", "space-3xl": "4rem", "space-lg": "1.5rem", "gutter-desktop": "1.5rem", "space-xl": "2rem", "space-md": "1rem", "gutter-mobile": "1rem", "space-2xl": "3rem", "space-xs": "0.5rem" }, fontFamily: { "headline-xl-mobile": ["Plus Jakarta Sans"], "label-sm": ["Inter"], "body-lg": ["Inter"], "headline-md": ["Plus Jakarta Sans"], "title-sm": ["Inter"], "label-md": ["Inter"], "headline-xl": ["Plus Jakarta Sans"], "queue-metric": ["Plus Jakarta Sans"], "display-lg-mobile": ["Plus Jakarta Sans"], "display-lg": ["Plus Jakarta Sans"], "body-md": ["Inter"] }, fontSize: { "headline-xl-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "400" }], "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "title-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }], "label-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600" }], "headline-xl": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "queue-metric": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.03em", "fontWeight": "800" }], "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "display-lg": ["44px", { "lineHeight": "52px", "letterSpacing": "-0.03em", "fontWeight": "800" }], "body-md": ["14px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400" }] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center justify-between px-gutter-mobile h-16 relative"><div class="flex items-center gap-space-xs"><button aria-label="Go back" class="w-11 h-11 flex items-center justify-center rounded-lg text-on-surface hover:bg-surface-container-low transition-colors" onclick="history.back()" type="button"><span class="material-symbols-outlined text-[22px]">arrow_back</span></button><img alt="GET SPOT" class="h-12 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxBFBNANzUh2K3Mp5GUKioQTWz0BJbjoJZJZ8YIGh6LmzkRBa98uglk24mvgwksTJ-_O3I_XEIOM-4ehDQrYtjiHKKjqOO3-XhhA0994Q8sOKTvFXT97g4GWvihnPBN-nws50RjyV_tJQNt9UikZ0IKGwemN5pnl4_RrXQsi7VpZa7CuBvuoMQc527cAbuhDFLMGJSwIDs_7JV1IeMoheoy4snVMugr60nHjGXD25EafQCfJVh1XpM4cE0NUFToW0rzms" style="mix-blend-mode: multiply;"></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="flex-1 flex flex-col relative w-full px-gutter-mobile pt-16 pb-safe bg-surface"><div class="flex flex-col w-full max-w-md mx-auto pb-space-2xl">
+<!-- Progress Header Component -->
+<div class="flex flex-col gap-space-xs mt-space-sm mb-space-lg"><div class="mt-space-md"><h1 class="font-headline-xl-mobile text-headline-xl-mobile text-on-surface font-bold tracking-tight">Tell us about yourself</h1><p class="font-body-md text-body-md text-on-surface-variant mt-1">We will verify your phone number to secure your account.</p></div></div>
+<!-- Main Card Surface -->
+<div class="flex flex-col gap-space-lg bg-surface-container-lowest rounded-xl p-space-lg shadow-sm">
+<!-- Verified Google SSO Banner -->
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-surface-container-lowest flex items-center justify-center shadow-sm">
+<svg class="w-4 h-4" viewBox="0 0 24 24">
+<path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z" fill="#4285F4"></path>
+<path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.34 24 12 24z" fill="#34A853"></path>
+<path d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.14-1.55.38-2.27V6.58H1.25C.45 8.16 0 9.94 0 12s.45 3.84 1.25 5.42l4.03-3.15z" fill="#FBBC05"></path>
+<path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z" fill="#EA4335"></path>
+</svg>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Connected via Google</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-normal">aarav.patel@acmelabs.in</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<!-- Identity Details Input Form -->
+<div class="flex flex-col gap-space-md">
+<!-- Field: Full Name -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold" for="full-name-input">
+          Full Name
+        </label>
+<div class="relative flex items-center">
+<input class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md rounded-lg px-3.5 py-3 pr-10 focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" id="full-name-input" placeholder="Legal name" type="text" value="Aarav Patel">
+<span class="material-symbols-outlined absolute right-3 text-outline text-[20px] pointer-events-none">badge</span>
+</div>
+</div>
+<!-- Field: Phone Number -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold" for="phone-input">
+          Mobile Phone Number
+        </label>
+<div class="flex items-center gap-2">
+<!-- Country Prefix Badge -->
+<div class="flex items-center gap-1.5 px-3 py-3 rounded-lg bg-surface-container-low font-title-sm text-title-sm text-on-surface shrink-0 cursor-default">
+<span class="text-base leading-none">🇮🇳</span>
+<span class="font-semibold">+91</span>
+<span class="material-symbols-outlined text-outline text-[16px]">expand_more</span>
+</div>
+<!-- Number Input -->
+<div class="relative flex-1">
+<input class="w-full bg-surface-container-low text-on-surface font-title-sm text-title-sm font-semibold tracking-wide rounded-lg px-3.5 py-3 focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" id="phone-input" placeholder="00000 00000" type="tel" value="98765 43210">
+</div>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">sms</span>
+          We'll send an SMS verification code to verify authority
+        </p>
+</div>
+</div>
+<!-- Active OTP Verification Section -->
+<div class="flex flex-col gap-space-sm pt-space-md bg-surface-container-low/60 rounded-xl p-space-md">
+<!-- Dispatch Status Notice -->
+<div class="flex items-start justify-between gap-space-xs">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-[14px]">send_to_mobile</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Code Sent to +91 98765 43210</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Enter the 6-digit confirmation key below</p>
+</div>
+</div>
+<button class="font-label-sm text-label-sm font-semibold text-primary hover:underline shrink-0" type="button">Edit</button>
+</div>
+<!-- 6-Digit Code Cells Grid -->
+<div class="grid grid-cols-6 gap-2 w-full mt-space-xs" id="otp-container">
+<div class="flex flex-col items-center justify-center h-13 py-3 rounded-lg bg-surface-container-lowest shadow-sm text-center font-headline-md text-headline-md font-bold text-on-surface">
+          5
+        </div>
+<div class="flex flex-col items-center justify-center h-13 py-3 rounded-lg bg-surface-container-lowest shadow-sm text-center font-headline-md text-headline-md font-bold text-on-surface">
+          8
+        </div>
+<div class="flex flex-col items-center justify-center h-13 py-3 rounded-lg bg-surface-container-lowest shadow-sm text-center font-headline-md text-headline-md font-bold text-on-surface">
+          2
+        </div>
+<div class="flex flex-col items-center justify-center h-13 py-3 rounded-lg bg-surface-container-lowest shadow-sm text-center font-headline-md text-headline-md font-bold text-on-surface">
+          9
+        </div>
+<div class="flex flex-col items-center justify-center h-13 py-3 rounded-lg bg-surface-container-low text-center font-headline-md text-headline-md font-bold text-primary animate-pulse">
+          |
+        </div>
+<div class="flex flex-col items-center justify-center h-13 py-3 rounded-lg bg-surface-container-low text-center font-headline-md text-headline-md font-bold text-outline">
+          •
+        </div>
+</div>
+<!-- Resend Interval & Micro-actions -->
+<div class="flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="font-label-sm text-label-sm" id="timer-display">Code expired?</span>
+</div>
+<button class="font-label-sm text-label-sm font-semibold transition-colors text-primary cursor-pointer hover:underline" id="resend-btn" onclick="handleResend()" type="button">
+          Resend via SMS
+        </button>
+</div>
+</div>
+<!-- Security Micro-Callout -->
+<div class="flex items-center gap-2 px-3 py-2.5 rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Protected with bank-grade 256-bit encryption for your account.</p>
+</div>
+</div>
+<!-- Operational Action Section -->
+<div class="flex flex-col gap-space-xs mt-space-lg">
+<button class="w-full flex items-center justify-center gap-2 py-3.5 px-space-md rounded-lg bg-inverse-surface hover:bg-on-surface text-inverse-on-surface font-title-sm text-title-sm font-semibold shadow-md active:scale-[0.99] transition-all" type="button">
+<span class="">Verify &amp; Continue</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<p class="font-label-sm text-label-sm text-center text-on-surface-variant px-space-sm mt-1">By verifying, you confirm and agree to verify your identity and account security.</p>
+</div>
+</div>
+<script>
+  // Dynamic countdown for tactile UX feedback
+  (function() {
+    let timeLeft = 24;
+    const timerElem = document.getElementById('seconds-count');
+    const resendBtn = document.getElementById('resend-btn');
+
+    const countdown = setInterval(() => {
+      timeLeft -= 1;
+      if (timerElem) {
+        timerElem.textContent = timeLeft + 's';
+      }
+      if (timeLeft <= 0) {
+        clearInterval(countdown);
+        if (resendBtn) {
+          resendBtn.disabled = false;
+          resendBtn.classList.remove('text-outline', 'cursor-not-allowed');
+          resendBtn.classList.add('text-primary', 'cursor-pointer', 'hover:underline');
+        }
+        const timerContainer = document.getElementById('timer-display');
+        if (timerContainer) {
+          timerContainer.innerHTML = 'Code expired?';
+        }
+      }
+    }, 1000);
+  })();
+
+  function handleResend() {
+    const resendBtn = document.getElementById('resend-btn');
+    if (resendBtn) {
+      resendBtn.textContent = 'Sending...';
+      setTimeout(() => {
+        resendBtn.textContent = 'SMS Sent!';
+        setTimeout(() => {
+          resendBtn.textContent = 'Resend via SMS';
+        }, 3000);
+      }, 800);
+    }
+  }
+</script></main>
+
+
+
+
+
+
+
+</body></html>

@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface: #faf8ff;
+  --color-surface-dim: #d2d9f4;
+  --color-surface-bright: #faf8ff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f2f3ff;
+  --color-surface-container: #eaedff;
+  --color-surface-container-high: #e2e7ff;
+  --color-surface-container-highest: #dae2fd;
+  --color-on-surface: #131b2e;
+  --color-on-surface-variant: #434655;
+  --color-inverse-surface: #283044;
+  --color-inverse-on-surface: #eef0ff;
+  --color-outline: #737686;
+  --color-outline-variant: #c3c6d7;
+  --color-surface-tint: #0053db;
+  --color-primary: #004ac6;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #2563eb;
+  --color-on-primary-container: #eeefff;
+  --color-inverse-primary: #b4c5ff;
+  --color-secondary: #bb0112;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #e02928;
+  --color-on-secondary-container: #fffbff;
+  --color-tertiary: #943700;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #bc4800;
+  --color-on-tertiary-container: #ffede6;
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+  --color-primary-fixed: #dbe1ff;
+  --color-primary-fixed-dim: #b4c5ff;
+  --color-on-primary-fixed: #00174b;
+  --color-on-primary-fixed-variant: #003ea8;
+  --color-secondary-fixed: #ffdad6;
+  --color-secondary-fixed-dim: #ffb4ab;
+  --color-on-secondary-fixed: #410002;
+  --color-on-secondary-fixed-variant: #93000b;
+  --color-tertiary-fixed: #ffdbcd;
+  --color-tertiary-fixed-dim: #ffb596;
+  --color-on-tertiary-fixed: #360f00;
+  --color-on-tertiary-fixed-variant: #7d2d00;
+  --color-background: #faf8ff;
+  --color-on-background: #131b2e;
+  --color-surface-variant: #dae2fd;
+  --color-brand-blue: #2563eb;
+  --color-brand-red: #dc2626;
+
+  --spacing-space-2xs: 0.25rem;
+  --spacing-space-xs: 0.5rem;
+  --spacing-space-sm: 0.75rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-lg: 1.5rem;
+  --spacing-space-xl: 2rem;
+  --spacing-space-2xl: 3rem;
+  --spacing-space-3xl: 4rem;
+  --spacing-gutter-mobile: 1rem;
+  --spacing-gutter-desktop: 1.5rem;
+  --spacing-container-max: 75rem;
+
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-headline-xl-mobile: 'Plus Jakarta Sans', sans-serif;
+  --font-headline-xl: 'Plus Jakarta Sans', sans-serif;
+  --font-headline-md: 'Plus Jakarta Sans', sans-serif;
+  --font-display-lg-mobile: 'Plus Jakarta Sans', sans-serif;
+  --font-display-lg: 'Plus Jakarta Sans', sans-serif;
+  --font-body-md: 'Inter', sans-serif;
+  --font-body-lg: 'Inter', sans-serif;
+  --font-title-sm: 'Inter', sans-serif;
+  --font-label-sm: 'Inter', sans-serif;
+  --font-label-md: 'Inter', sans-serif;
+  --font-queue-metric: 'Plus Jakarta Sans', sans-serif;
+}
+
+@layer base {
+  html, body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    overscroll-behavior: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  input:not([type="checkbox"]):not([type="radio"]):focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--color-primary, #004ac6);
+    outline-offset: 1px;
+    box-shadow: 0 0 0 3px rgba(0, 74, 198, 0.18);
+  }
+
+  input:not([type="checkbox"]):not([type="radio"]):focus,
+  textarea:focus,
+  select:focus {
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, background-color 0.15s ease-in-out;
+  }
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* 2D Micro-interaction Animations from Welcome screen */
+@keyframes mapRouteTrace {
+  0%, 12% { stroke-dashoffset: 160; opacity: 0.3; }
+  55%, 85% { stroke-dashoffset: 0; opacity: 1; }
+  92%, 100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes mapUserTravel {
+  0% { offset-distance: 0%; opacity: 0; transform: scale(0.7); }
+  10% { offset-distance: 0%; opacity: 1; transform: scale(1); }
+  62% { offset-distance: 100%; opacity: 1; transform: scale(1); }
+  72%, 85% { offset-distance: 100%; opacity: 0.85; transform: scale(0.9); }
+  92%, 100% { offset-distance: 100%; opacity: 0; transform: scale(0.6); }
+}
+@keyframes userHaloPulse {
+  0%, 10% { transform: scale(1); opacity: 0.8; }
+  30% { transform: scale(2.2); opacity: 0; }
+  31%, 100% { transform: scale(1); opacity: 0; }
+}
+@keyframes spotPinReact {
+  0%, 58% { transform: scale(1); }
+  66% { transform: translateY(-4px) scale(1.15); }
+  74% { transform: translateY(0) scale(1); }
+  82% { transform: scale(1.04); }
+  90%, 100% { transform: scale(1); }
+}
+@keyframes spotRipplePulse {
+  0%, 60% { transform: scale(0.6); opacity: 0; }
+  66% { transform: scale(0.9); opacity: 0.8; stroke-width: 2.5; }
+  84% { transform: scale(1.9); opacity: 0; stroke-width: 1; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+@keyframes spotBadgeFade {
+  0%, 64% { opacity: 0; transform: translateY(3px) scale(0.9); }
+  72%, 86% { opacity: 1; transform: translateY(0) scale(1); }
+  92%, 100% { opacity: 0; transform: translateY(-2px) scale(0.95); }
+}
+
+.route-active-line {
+  stroke-dasharray: 160;
+  animation: mapRouteTrace 3.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+.user-nav-dot {
+  offset-path: path("M 36 76 C 54 76, 68 58, 102 54 C 132 50, 146 38, 168 28");
+  animation: mapUserTravel 3.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+.user-pulse-ring {
+  animation: userHaloPulse 3.8s ease-out infinite;
+  transform-origin: 36px 76px;
+}
+.spot-marker-group {
+  animation: spotPinReact 3.8s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+  transform-origin: 168px 28px;
+}
+.spot-ripple-circle {
+  animation: spotRipplePulse 3.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  transform-origin: 168px 28px;
+}
+.spot-badge-group {
+  animation: spotBadgeFade 3.8s ease-out infinite;
+  transform-origin: 168px 6px;
+}

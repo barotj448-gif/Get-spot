@@ -1,0 +1,6 @@
+{
+  "name": "GET SPOT",
+  "description": "Smart queueing & live spot tracking platform with customer discover and worker queue management",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

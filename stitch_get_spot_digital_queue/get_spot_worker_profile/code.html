@@ -1,0 +1,176 @@
+<!DOCTYPE html><html lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>GET SPOT - Worker Profile / Shop Profile</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              red: '#e11d48',
+              'red-hover': '#be123c',
+              dark: '#0f172a',
+              muted: '#64748b',
+              border: '#e2e8f0',
+              bg: '#ffffff',
+              subtle: '#f8fafc',
+              blue: '#2563eb'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #ffffff;
+      color: #0f172a;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-white text-slate-900 antialiased flex flex-col justify-between">
+<!-- Top Navigation / Header -->
+<header class="border-b border-slate-200 bg-white sticky top-0 z-30">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+<!-- Left-aligned brand logo -->
+<div class="flex items-center">
+<img alt="GET SPOT Logo" class="h-10 sm:h-12 w-auto object-contain object-left" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVTwE0YWspHZsW3DzgnKBGUJlJDTdMax8qOhXeanRxotbd3AOycmep9tFMt-VbPZbYuDojAd6cgiYg5eaEACTDVmuWM7X9qt3Mw5JN1Uzif2hVURFQ9iIRVmL-oI1LmS2EY_xNEEzRxOb1ZySsN6JG0VlfmCNV-Wiqx6ZaZIrjVhJw6xkGyWJD2e8NnbKu0OZzn4Yyn3fsTlI5IxfS3XXU3mhlBLGwiKzwlEQJ2CS551TUfFNM_IIZM9KPN1i3d1M7nC0">
+</div>
+<!-- Worker badge indicator -->
+
+</div>
+</header>
+<!-- Main Content Container -->
+<main class="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 pb-24">
+<!-- Worker Profile Photo Section -->
+<div class="mb-8"><div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"><div class="flex items-center gap-4 sm:gap-5"><div class="relative"><img alt="Worker Profile Photo" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-2 border-slate-200 shadow-sm" src="https://lh3.googleusercontent.com/aida/AEtjO1W_tcBMOiW9RjQiMT5HLcL-HMYyPKCCosDN_8lqENYJr8u5AjDZgjtrT9AiMmQk0v17Zdb0nDSUfyGNi9RrHlD9NbEN3vPUotUUYSfWcxqpeX4ZSpjKP6RVwBhVQ3JpRek1Q2c9BjAHR3mw2yL-xiQiBXotgTKWlJGgm94b5lCZVZ7sr2Y3Ie6nES4KUfemn4VfYrWpjmR6EFO9cpqojHu5T7tLB61Jtdk3Be0ZUbcm-eJRBn_3NWfDaRpf"><button class="absolute bottom-0 right-0 bg-white border border-slate-300 rounded-full p-1.5 shadow-sm text-slate-700 hover:text-slate-900 transition-colors" title="Change photo"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button></div><div><span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block">Worker Account</span><h1 class="text-xl sm:text-2xl font-bold text-slate-900">Marcus Vance</h1><p class="text-sm text-slate-500">Master Barber &amp; Shop Manager</p></div></div><div class="bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl text-center shadow-sm sm:self-center"><div class="text-2xl sm:text-3xl font-extrabold text-[#2563eb] leading-tight">100</div><div class="text-xs font-semibold uppercase tracking-wider text-slate-600 mt-0.5 whitespace-nowrap">Followers</div></div></div></div>
+<!-- Large Shop Banner / Cover Photo -->
+<div class="mb-8 relative rounded-lg overflow-hidden border border-slate-200 shadow-sm bg-slate-100">
+<img alt="Shop Cover Banner" class="w-full h-44 sm:h-60 md:h-72 object-cover object-center" src="https://lh3.googleusercontent.com/aida/AEtjO1Xsl6dvyswFG2MF9vTGJu6iW4nTFIqyhfum7KioMmScSKv9aymy8_tlAWj1nnz4Yhlut5XskYgkA9see-NrMlRu5RQH9pkZCVFMKpk5E7swY1pRM8jhNBuTRjGLhWiibGtj6VfptNd7PUayMcVMWgXEevXSZzvl7VvEiYxvPiHYQhia13IecVHJaN-KHCeBaRo5BiGNV9wGocjJRDV_0BxFMgrmWWXFXBASjx3NJEVhFilgrF7t3KwnENk">
+<button class="absolute top-3 right-3 bg-white/95 backdrop-blur-none border border-slate-300 text-slate-700 hover:text-slate-900 text-xs font-semibold px-3 py-1.5 rounded-md shadow-sm flex items-center gap-1.5 transition-colors">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+        Edit Cover
+      </button>
+</div>
+<!-- Shop & Worker Details List (Clean, non-giant-card layout) -->
+<div class="space-y-6">
+<!-- Shop Name -->
+<div class="flex items-center justify-between py-3.5 border-b border-slate-200">
+<div>
+<span class="text-xs font-medium text-slate-500 uppercase tracking-wide block">Shop Name</span>
+<p class="text-base sm:text-lg font-semibold text-slate-900 mt-0.5">Classic Cuts Barbershop</p>
+</div>
+<button class="inline-flex items-center gap-1 text-xs font-medium text-slate-600 hover:text-slate-900 px-2.5 py-1 rounded border border-slate-300 hover:bg-slate-50 transition-colors">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+          Edit
+        </button>
+</div>
+<!-- Worker Name -->
+<div class="flex items-center justify-between py-3.5 border-b border-slate-200">
+<div>
+<span class="text-xs font-medium text-slate-500 uppercase tracking-wide block">Worker Name</span>
+<p class="text-base sm:text-lg font-semibold text-slate-900 mt-0.5">Marcus Vance</p>
+</div>
+<button class="inline-flex items-center gap-1 text-xs font-medium text-slate-600 hover:text-slate-900 px-2.5 py-1 rounded border border-slate-300 hover:bg-slate-50 transition-colors">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+          Edit
+        </button>
+</div>
+<!-- Email -->
+<div class="flex items-center justify-between py-3.5 border-b border-slate-200">
+<div>
+<span class="text-xs font-medium text-slate-500 uppercase tracking-wide block">Email</span>
+<p class="text-base sm:text-lg font-medium text-slate-900 mt-0.5">marcus.vance@getspot.com</p>
+</div>
+<button class="inline-flex items-center gap-1 text-xs font-medium text-slate-600 hover:text-slate-900 px-2.5 py-1 rounded border border-slate-300 hover:bg-slate-50 transition-colors">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+          Edit
+        </button>
+</div>
+<!-- Location -->
+<div class="flex items-center justify-between py-3.5 border-b border-slate-200">
+<div>
+<span class="text-xs font-medium text-slate-500 uppercase tracking-wide block">Location</span>
+<p class="text-base sm:text-lg font-medium text-slate-900 mt-0.5">Shop 14, High Street Market, Downtown, Sector 4</p>
+</div>
+<button class="inline-flex items-center gap-1 text-xs font-medium text-slate-600 hover:text-slate-900 px-2.5 py-1 rounded border border-slate-300 hover:bg-slate-50 transition-colors">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+          Edit
+        </button>
+</div>
+<!-- Followers (Display-only, no Edit button) -->
+
+<!-- Operational Capacities Section -->
+<div class="pt-4 space-y-6">
+<h2 class="text-sm font-bold uppercase tracking-wider text-slate-700">Queue &amp; Serving Parameters</h2>
+<!-- How many customers do you serve at one time? -->
+<div class="flex items-center justify-between py-3.5 border-b border-slate-200">
+<div class="pr-4">
+<span class="text-xs sm:text-sm font-medium text-slate-600 block">How many customers do you serve at one time?</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="text-xl sm:text-2xl font-bold text-slate-900">2</span>
+<span class="text-xs text-slate-500">simultaneous spots active</span>
+</div>
+</div>
+<button class="inline-flex items-center gap-1 text-xs font-medium text-slate-600 hover:text-slate-900 px-2.5 py-1 rounded border border-slate-300 hover:bg-slate-50 transition-colors">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+            Edit
+          </button>
+</div>
+<!-- How much time does it take to complete one customer? -->
+<div class="flex items-center justify-between py-3.5 border-b border-slate-200">
+<div class="pr-4">
+<span class="text-xs sm:text-sm font-medium text-slate-600 block">Approx Average Service Time per Customer</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="text-xl sm:text-2xl font-bold text-slate-900">15 min</span>
+<span class="text-xs text-slate-500">average turnaround per customer</span>
+</div>
+</div>
+<button class="inline-flex items-center gap-1 text-xs font-medium text-slate-600 hover:text-slate-900 px-2.5 py-1 rounded border border-slate-300 hover:bg-slate-50 transition-colors">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+            Edit
+          </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Clean Minimalist Footer -->
+<footer class="border-t border-slate-200 py-6 bg-white mt-12">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-2">
+<span class="">GET SPOT Worker Management</span>
+<span class="">Profile &amp; Shop Settings • All details synchronized</span>
+</div>
+</footer><nav class="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-slate-200 py-2.5 px-6 shadow-sm"><div class="max-w-7xl mx-auto flex items-center justify-around md:justify-center md:gap-16"><a href="#" class="flex flex-col items-center gap-1 text-slate-500 hover:text-slate-900 transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg><span class="text-xs font-medium">Live Queue</span></a><a href="#" class="flex flex-col items-center gap-1 text-slate-500 hover:text-slate-900 transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span class="text-xs font-medium">Completed</span></a><a href="#" class="flex flex-col items-center gap-1 text-blue-600 transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg><span class="text-xs font-semibold">Profile</span></a></div></nav>
+
+
+
+
+
+
+
+
+</body></html>
