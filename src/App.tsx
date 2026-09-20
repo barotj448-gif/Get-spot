@@ -29,17 +29,20 @@ export const App: React.FC = () => {
   const [role, setRole] = useState<'customer' | 'worker'>('customer');
   const [lastCustomerTab, setLastCustomerTab] = useState<Screen>('customer-discover');
 
+  const [previousScreen, setPreviousScreen] = useState<Screen | null>(null);
+
+  const navigateTo = (nextScreen: Screen) => {
+    setPreviousScreen(currentScreen);
+    setCurrentScreen(nextScreen);
+  };
+
   const handleContinueFromRoleSelection = (selectedRole: 'customer' | 'worker') => {
     setRole(selectedRole);
-    setCurrentScreen('otp');
+    navigateTo('otp');
   };
 
   const handleOtpVerify = () => {
-    if (role === 'customer') {
-      setCurrentScreen('customer-discover');
-    } else {
-      setCurrentScreen('worker-setup');
-    }
+    navigateTo(role === 'customer' ? 'customer-discover' : 'worker-setup');
   };
 
   const handleCustomerNavigateTab = (tab: 'discover' | 'booking' | 'profile') => {
@@ -70,84 +73,40 @@ export const App: React.FC = () => {
     setCurrentScreen('welcome');
   };
 
+  const renderScreen = (screen: Screen) => {
+    switch (screen) {
+      case 'welcome':
+        return <WelcomeScreen onNext={() => navigateTo('role-selection')} onGoToRoleSelection={() => navigateTo('role-selection')} />;
+      case 'role-selection':
+        return <RoleSelectionScreen initialRole={role} onBack={() => navigateTo('welcome')} onContinue={handleContinueFromRoleSelection} />;
+      case 'otp':
+        return <OtpScreen role={role} onBack={() => navigateTo('role-selection')} onVerify={handleOtpVerify} />;
+      case 'customer-discover':
+        return <CustomerDiscoverScreen onNavigateTab={handleCustomerNavigateTab} onTrackQueue={() => navigateTo('customer-tracking')} />;
+      case 'customer-booking':
+        return <CustomerBookingScreen onNavigateTab={handleCustomerNavigateTab} onTrackQueue={() => navigateTo('customer-tracking')} />;
+      case 'customer-tracking':
+        return <CustomerQueueTrackingScreen onBack={() => navigateTo(lastCustomerTab)} />;
+      case 'customer-profile':
+        return <CustomerProfileScreen onNavigateTab={handleCustomerNavigateTab} onLogout={handleLogout} />;
+      case 'worker-setup':
+        return <WorkerShopSetupScreen onBack={() => navigateTo('otp')} onFinish={() => navigateTo('worker-queue')} />;
+      case 'worker-queue':
+        return <WorkerLiveQueueScreen onNavigateTab={handleWorkerNavigateTab} />;
+      case 'worker-completed':
+        return <WorkerCompletedScreen onNavigateTab={handleWorkerNavigateTab} />;
+      case 'worker-profile':
+        return <WorkerProfileScreen onNavigateTab={handleWorkerNavigateTab} onLogout={handleLogout} />;
+    }
+  };
+
+  const isAuthFlow = ['welcome', 'role-selection', 'otp'].includes(currentScreen);
+  const showLayeredAuth = isAuthFlow && previousScreen && ['welcome', 'role-selection', 'otp'].includes(previousScreen);
+
   return (
-    <div className="min-h-screen bg-white">
-      {/* Active Screen Rendering */}
-      {currentScreen === 'welcome' && (
-        <WelcomeScreen
-          onNext={() => setCurrentScreen('role-selection')}
-          onGoToRoleSelection={() => setCurrentScreen('role-selection')}
-        />
-      )}
-
-      {currentScreen === 'role-selection' && (
-        <RoleSelectionScreen
-          initialRole={role}
-          onBack={() => setCurrentScreen('welcome')}
-          onContinue={handleContinueFromRoleSelection}
-        />
-      )}
-
-      {currentScreen === 'otp' && (
-        <OtpScreen
-          role={role}
-          onBack={() => setCurrentScreen('role-selection')}
-          onVerify={handleOtpVerify}
-        />
-      )}
-
-      {currentScreen === 'customer-discover' && (
-        <CustomerDiscoverScreen
-          onNavigateTab={handleCustomerNavigateTab}
-          onTrackQueue={() => setCurrentScreen('customer-tracking')}
-        />
-      )}
-
-      {currentScreen === 'customer-booking' && (
-        <CustomerBookingScreen
-          onNavigateTab={handleCustomerNavigateTab}
-          onTrackQueue={() => setCurrentScreen('customer-tracking')}
-        />
-      )}
-
-      {currentScreen === 'customer-tracking' && (
-        <CustomerQueueTrackingScreen
-          onBack={() => setCurrentScreen(lastCustomerTab)}
-        />
-      )}
-
-      {currentScreen === 'customer-profile' && (
-        <CustomerProfileScreen
-          onNavigateTab={handleCustomerNavigateTab}
-          onLogout={handleLogout}
-        />
-      )}
-
-      {currentScreen === 'worker-setup' && (
-        <WorkerShopSetupScreen
-          onBack={() => setCurrentScreen('otp')}
-          onFinish={() => setCurrentScreen('worker-queue')}
-        />
-      )}
-
-      {currentScreen === 'worker-queue' && (
-        <WorkerLiveQueueScreen
-          onNavigateTab={handleWorkerNavigateTab}
-        />
-      )}
-
-      {currentScreen === 'worker-completed' && (
-        <WorkerCompletedScreen
-          onNavigateTab={handleWorkerNavigateTab}
-        />
-      )}
-
-      {currentScreen === 'worker-profile' && (
-        <WorkerProfileScreen
-          onNavigateTab={handleWorkerNavigateTab}
-          onLogout={handleLogout}
-        />
-      )}
+    <div className={showLayeredAuth ? 'auth-stage' : 'min-h-screen bg-white'}>
+      {showLayeredAuth && <div className="auth-background" aria-hidden="true">{renderScreen(previousScreen)}</div>}
+      <div className={showLayeredAuth ? 'auth-foreground' : undefined}>{renderScreen(currentScreen)}</div>
     </div>
   );
 };
