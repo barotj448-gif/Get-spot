@@ -70,31 +70,55 @@ export const App: React.FC = () => {
     setCurrentScreen('welcome');
   };
 
-  return (
-    <div className="min-h-screen bg-white">
-      {/* Active Screen Rendering */}
-      {currentScreen === 'welcome' && (
+  const isAuthScreen = currentScreen === 'welcome' || currentScreen === 'role-selection' || currentScreen === 'otp';
+
+  const renderAuthScreen = (screen: 'welcome' | 'role-selection' | 'otp') => {
+    if (screen === 'welcome') {
+      return (
         <WelcomeScreen
           onNext={() => setCurrentScreen('role-selection')}
           onGoToRoleSelection={() => setCurrentScreen('role-selection')}
         />
-      )}
+      );
+    }
 
-      {currentScreen === 'role-selection' && (
+    if (screen === 'role-selection') {
+      return (
         <RoleSelectionScreen
           initialRole={role}
           onBack={() => setCurrentScreen('welcome')}
           onContinue={handleContinueFromRoleSelection}
         />
-      )}
+      );
+    }
 
-      {currentScreen === 'otp' && (
-        <OtpScreen
-          role={role}
-          onBack={() => setCurrentScreen('role-selection')}
-          onVerify={handleOtpVerify}
-        />
-      )}
+    return <OtpScreen role={role} onBack={() => setCurrentScreen('role-selection')} onVerify={handleOtpVerify} />;
+  };
+
+  return (
+    <div className="min-h-screen bg-white">
+      {isAuthScreen ? (
+        <div className="auth-stage">
+          <div className="auth-stage__shape auth-stage__shape--top" />
+          <div className="auth-stage__shape auth-stage__shape--bottom" />
+          <div className="auth-stage__shape auth-stage__shape--side" />
+          <div className="auth-stage__viewport" aria-live="polite">
+            {(['welcome', 'role-selection', 'otp'] as const).map((screen, index) => {
+              const activeIndex = ['welcome', 'role-selection', 'otp'].indexOf(currentScreen);
+              const distance = index - activeIndex;
+              return (
+                <section
+                  aria-hidden={distance !== 0}
+                  className={`auth-slide auth-slide--${distance === 0 ? 'active' : distance < 0 ? 'previous' : 'next'}`}
+                  key={screen}
+                >
+                  {renderAuthScreen(screen)}
+                </section>
+              );
+            })}
+          </div>
+        </div>
+      ) : null}
 
       {currentScreen === 'customer-discover' && (
         <CustomerDiscoverScreen
