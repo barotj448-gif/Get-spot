@@ -1,28 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 interface WelcomeScreenProps {
-  onSelectRole: (role: 'customer' | 'worker') => void;
-  onGoToRoleSelection: () => void;
+  onNext: () => void;
+  onSelectRole?: (role: 'customer' | 'worker') => void;
+  onGoToRoleSelection?: () => void;
 }
 
 export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
-  onSelectRole,
+  onNext,
   onGoToRoleSelection,
 }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isConnecting, setIsConnecting] = useState(false);
-
-  const handleGoogleClick = () => {
-    setIsConnecting(true);
-    setTimeout(() => {
-      setIsConnecting(false);
+  const handleNext = () => {
+    if (onNext) {
+      onNext();
+    } else if (onGoToRoleSelection) {
       onGoToRoleSelection();
-    }, 400);
-  };
-
-  const handleRoleSelect = (role: 'customer' | 'worker') => {
-    setIsModalOpen(false);
-    onSelectRole(role);
+    }
   };
 
   return (
@@ -157,34 +150,14 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
         {/* BOTTOM SECTION: Authentication & Terms */}
         <div className="w-full flex flex-col items-center">
           <div className="w-full max-w-sm flex flex-col gap-4">
-            {/* Prominent 'Continue with Google' Button */}
+            {/* 'Next' Button */}
             <button
-              className="w-full min-h-[52px] py-3.5 px-5 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 shadow-sm active:scale-[0.99] transition-all duration-150 ease-in-out rounded-xl flex items-center justify-center gap-3.5 text-slate-800 font-semibold text-base select-none cursor-pointer group"
-              id="googleAuthBtn"
+              className="w-full min-h-[52px] py-3.5 px-5 bg-slate-900 hover:bg-slate-800 text-white shadow-sm active:scale-[0.99] transition-all duration-150 ease-in-out rounded-xl flex items-center justify-center text-center font-semibold text-base select-none cursor-pointer tracking-tight"
+              id="nextBtn"
               type="button"
-              onClick={handleGoogleClick}
+              onClick={handleNext}
             >
-              <svg aria-hidden="true" className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24">
-                <path
-                  d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"
-                  fill="#4285F4"
-                />
-                <path
-                  d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"
-                  fill="#34A853"
-                />
-                <path
-                  d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.14-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.98 0 12s.45 3.82 1.25 5.42l4.03-3.15z"
-                  fill="#FBBC05"
-                />
-                <path
-                  d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
-                  fill="#EA4335"
-                />
-              </svg>
-              <span className="tracking-tight" id="googleBtnText">
-                {isConnecting ? 'Connecting...' : 'Continue with Google'}
-              </span>
+              Next
             </button>
 
             <div className="w-full pt-1 pb-0.5 text-center flex flex-col items-center gap-3">
@@ -269,99 +242,6 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
           </div>
         </div>
       </main>
-
-      {/* ROLE SELECTION MODAL / BOTTOM SHEET */}
-      {isModalOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-900/40 backdrop-blur-xs transition-opacity duration-200"
-          id="roleSelectionModal"
-          onClick={() => setIsModalOpen(false)}
-        >
-          <div
-            className="w-full max-w-md bg-white rounded-t-3xl sm:rounded-2xl p-6 sm:p-7 shadow-2xl transition-transform duration-250 ease-out border border-slate-100 flex flex-col gap-5"
-            id="roleModalContent"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Modal Header */}
-            <div className="flex items-center justify-between">
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-red-600">
-                  GET SPOT Account
-                </span>
-                <h3 className="text-xl font-bold font-display text-slate-900 tracking-tight mt-0.5">
-                  Who are you?
-                </h3>
-              </div>
-              <button
-                aria-label="Close"
-                className="p-1.5 text-slate-400 hover:text-slate-700 rounded-full hover:bg-slate-100 transition-colors"
-                id="closeModalBtn"
-                type="button"
-                onClick={() => setIsModalOpen(false)}
-              >
-                <span className="material-symbols-outlined text-xl leading-none">close</span>
-              </button>
-            </div>
-
-            {/* Role Options */}
-            <div className="flex flex-col gap-3 pt-1">
-              {/* Customer Option */}
-              <button
-                className="role-card group w-full text-left p-4 rounded-xl border border-slate-200 hover:border-red-500 hover:bg-red-50/40 active:scale-[0.99] transition-all flex items-start gap-3.5 focus:outline-none focus:ring-2 focus:ring-red-500 cursor-pointer"
-                type="button"
-                onClick={() => handleRoleSelect('customer')}
-              >
-                <div className="w-10 h-10 rounded-lg bg-red-100/80 text-red-600 flex items-center justify-center flex-shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors">
-                  <span className="material-symbols-outlined text-2xl">person</span>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between">
-                    <span className="font-display font-semibold text-base text-slate-900 group-hover:text-red-600 transition-colors">
-                      I’m a Customer
-                    </span>
-                    <span className="material-symbols-outlined text-slate-400 text-lg group-hover:text-red-600 group-hover:translate-x-0.5 transition-all">
-                      arrow_forward
-                    </span>
-                  </div>
-                  <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-                    Find businesses and get your digital spot
-                  </p>
-                </div>
-              </button>
-
-              {/* Worker Option */}
-              <button
-                className="role-card group w-full text-left p-4 rounded-xl border border-slate-200 hover:border-slate-800 hover:bg-slate-50 active:scale-[0.99] transition-all flex items-start gap-3.5 focus:outline-none focus:ring-2 focus:ring-slate-800 cursor-pointer"
-                type="button"
-                onClick={() => handleRoleSelect('worker')}
-              >
-                <div className="w-10 h-10 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center flex-shrink-0 group-hover:bg-slate-800 group-hover:text-white transition-colors">
-                  <span className="material-symbols-outlined text-2xl">storefront</span>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between">
-                    <span className="font-display font-semibold text-base text-slate-900 group-hover:text-slate-900 transition-colors">
-                      I’m a Worker
-                    </span>
-                    <span className="material-symbols-outlined text-slate-400 text-lg group-hover:text-slate-800 group-hover:translate-x-0.5 transition-all">
-                      arrow_forward
-                    </span>
-                  </div>
-                  <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-                    Manage your business and live queue
-                  </p>
-                </div>
-              </button>
-            </div>
-
-            <div className="pt-1 pb-1 text-center">
-              <p className="text-[11px] text-slate-400">
-                You can switch or link accounts anytime in Settings
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

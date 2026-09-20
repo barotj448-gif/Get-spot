@@ -29,11 +29,6 @@ export const App: React.FC = () => {
   const [role, setRole] = useState<'customer' | 'worker'>('customer');
   const [lastCustomerTab, setLastCustomerTab] = useState<Screen>('customer-discover');
 
-  const handleSelectRoleFromWelcome = (selectedRole: 'customer' | 'worker') => {
-    setRole(selectedRole);
-    setCurrentScreen('otp');
-  };
-
   const handleContinueFromRoleSelection = (selectedRole: 'customer' | 'worker') => {
     setRole(selectedRole);
     setCurrentScreen('otp');
@@ -80,7 +75,7 @@ export const App: React.FC = () => {
       {/* Active Screen Rendering */}
       {currentScreen === 'welcome' && (
         <WelcomeScreen
-          onSelectRole={handleSelectRoleFromWelcome}
+          onNext={() => setCurrentScreen('role-selection')}
           onGoToRoleSelection={() => setCurrentScreen('role-selection')}
         />
       )}
